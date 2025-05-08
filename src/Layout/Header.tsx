@@ -15,7 +15,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    toast.success("Logged out successfully")
+    toast.success("Logged out successfully");
     navigate("/login");
   };
 
@@ -50,7 +50,7 @@ const Header = () => {
       <div className="max-w-sm w-full bg-white flex flex-row items-center px-4 py-2 relative">
         {/* Left empty div for balance */}
         <div className="w-5"></div>
-        
+
         {/* Instagram logo centered */}
         <div className="flex-1 flex justify-center">
           <img
@@ -59,7 +59,7 @@ const Header = () => {
             src={Icons.social}
           />
         </div>
-        
+
         {/* Menu icon at right */}
         <div className="relative">
           <img
