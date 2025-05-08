@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities{
+    .container {
+        @apply h-[80vh] overflow-y-auto overflow-x-auto break-words max-w-sm py-4 px-5 bg-white
+    }
+    .contain{
+        @apply flex items-center justify-center bg-gray-100
+    }
+}
