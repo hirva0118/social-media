@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 const axiosInstance : AxiosInstance = axios.create({
-    baseURL:"http://16.171.22.233/api/v1",
+    baseURL:import.meta.env.VITE_APP_BASE_URL,
 });
 
 axiosInstance.interceptors.request.use((request : InternalAxiosRequestConfig)=>{
