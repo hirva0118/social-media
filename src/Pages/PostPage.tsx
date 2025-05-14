@@ -12,6 +12,7 @@ const PostPage = () => {
   const [zoom, setZoom] = useState(1);
   const [caption, setcaption] = useState("");
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -58,6 +59,7 @@ const PostPage = () => {
   const handlesave = async () => {
     if (!postImage || !croppedAreaPixels) return;
     try {
+      setIsLoading(true);
       const croppedImageBlob = await getCroppedImg();
       if (!croppedImageBlob) return;
 
@@ -67,21 +69,21 @@ const PostPage = () => {
 
       dispatch(createPost(formData) as any).then((response: any) => {
         if (response.payload.content) {
-          toast.success("Post created successfully")
+          toast.success("Post created successfully");
           navigate("/profile");
-        }else if (response?.payload?.status === 413) {
+        } else if (response?.payload?.status === 413) {
           toast.error("File size too large");
         } else if (response?.payload?.status === 422) {
-          toast.error("Caption is required"); 
-        }
-        else { 
+          toast.error("Caption is required");
+        } else {
           console.error("Upload failed:", response.payload.error);
           toast.error("File size too large");
-
         }
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const handleCancel = () => {
@@ -134,11 +136,16 @@ const PostPage = () => {
               />
               <div className="flex flex-row justify-between gap-4">
                 <button
-                  className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition text-sm"
+                  className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition text-sm w-[100%]"
                   title="save"
                   onClick={handlesave}
                 >
-                  Save and Upload
+                  {isLoading ? (
+                    <div className="absolute left-10 top-3/4 transform -translate-y-1/2 w-full">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  ):("Save and upload")}
+                  {/* Save and Upload */}
                 </button>
                 <button
                   className="p-2 z-50 border rounded-lg border-gray-200 text-sm"

@@ -372,7 +372,7 @@ const Home: React.FC = () => {
                       <span>{post.likes}</span>
                     </div>
                   ) : (
-                    <div className="flex flex-row gap-2 m-2 items-center">
+                    <div className="flex flex-row gap-2 my-2 mr-2  items-center">
                       <img
                         alt="unlike"
                         className="w-5 h-5 cursor-pointer"
