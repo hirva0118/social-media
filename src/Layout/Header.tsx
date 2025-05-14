@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const Header = () => {
   const [isButtonOpen, setIsButtonOpen] = useState(false);
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef(null);
   const navigate = useNavigate();
 
@@ -21,12 +21,11 @@ const Header = () => {
 
   // Close menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event:MouseEvent) => {
       if (
         isButtonOpen &&
         menuRef.current &&
-        !menuRef.current.contains(event.target) &&
-        !buttonRef.current.contains(event.target)
+        !menuRef.current.contains(event.target as Node) 
       ) {
         setIsButtonOpen(false);
       }

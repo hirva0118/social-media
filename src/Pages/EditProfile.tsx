@@ -60,7 +60,7 @@ const EditProfile = () => {
     },
   });
 
-  const handleProfile = (e) => {
+  const handleProfile = (e:any) => {
     const file = e.target.files[0];
     if (file) {
       setProfile(file);
@@ -180,7 +180,7 @@ const EditProfile = () => {
                 title="bio"
                 value={formik.values.bio}
                 name="bio"
-                rows="3"
+                // rows="3"
                 placeholder="Tell us about yourself"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

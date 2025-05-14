@@ -232,7 +232,7 @@ const OpenPost = () => {
                 <img
                   className="w-7 h-7"
                   alt="profile"
-                  src={singlePostdata.author.coverImage.url}
+                  src={singlePostdata.author.coverImage.url?? "https://newerahospitalnagpur.com/admin/uploads/donors/4549_ad.png"}
                   onError={(e)=>e.currentTarget.src="https://newerahospitalnagpur.com/admin/uploads/donors/4549_ad.png"}
 
                 />
@@ -262,7 +262,7 @@ const OpenPost = () => {
 
             {singlePostdata?.images.map((post) => (
               <div key={post.url}>
-                <img className="w-[100%]" alt="image" src={post.url}></img>
+                <img className="w-[100%]" alt="image" src={post.url ?? ""}></img>
               </div>
             ))}
 

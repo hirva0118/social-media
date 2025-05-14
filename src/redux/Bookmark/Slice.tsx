@@ -17,6 +17,10 @@ const initialState: initialValue = {
     serialNumberStartFrom: 0,
     totalPages: 0,
     totalPosts: 0,
+    page: 0,
+    nextPage: 0,
+    hasNextPage: false,
+    hasPrevPage: false
   },
   singlePost: null,
   commentdata: null,

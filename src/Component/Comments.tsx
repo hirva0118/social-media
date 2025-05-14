@@ -8,7 +8,7 @@ interface commentDataProps {
   likes: number;
   id: string;
   authorId: string;
-  profile: React.ImgHTMLAttributes<HTMLImageElement>;
+  profile: string;
   onClick: React.MouseEventHandler<HTMLImageElement>;
   onClickButton: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -34,7 +34,7 @@ const CommentComponent: React.FC<commentDataProps> = ({
           <div className="ml-2 w-6 h-6 items-end">
             <img
               alt="p"
-              src={profile}
+              src={profile || "https://newerahospitalnagpur.com/admin/uploads/donors/4549_ad.png"}
               onError={(e) =>
                 (e.currentTarget.src =
                   "https://newerahospitalnagpur.com/admin/uploads/donors/4549_ad.png")

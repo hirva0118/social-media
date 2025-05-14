@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-const ReadMore = ({ text, maxLength }) => {
+interface ReadMoreProps {
+  text: string;
+  maxLength: number;
+}
+
+const ReadMore:React.FC<ReadMoreProps> = ({ text, maxLength }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleReadMore = () => {

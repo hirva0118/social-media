@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Icons } from "../assets/pngs";
 import { useAppSelector } from "../redux/store";
-import { useState } from "react";
 
 const Footer = () => {
 

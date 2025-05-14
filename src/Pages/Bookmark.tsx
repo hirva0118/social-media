@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getBookmark } from "../redux/Bookmark/Slice";
 
 const Bookmark = () => {
@@ -8,7 +8,6 @@ const Bookmark = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     dispatch(getBookmark());
@@ -30,7 +29,7 @@ const Bookmark = () => {
         <div className="grid grid-cols-2 gap-2 pt-5">
         {book?.bookmarkedPosts.map((b) => (
           <div className="w-32 h-32 ">
-            <img alt="image" src={b.images[0].url} onClick={()=>handleNavigate(b._id)} />
+            <img alt="image" src={b.images[0].url ?? ""} onClick={()=>handleNavigate(b._id)} />
           </div>
         ))}
         </div>

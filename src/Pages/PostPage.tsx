@@ -5,24 +5,31 @@ import { useNavigate } from "react-router-dom";
 import { createPost } from "../redux/Post/Slice";
 import { toast } from "react-toastify";
 
+interface CroppedAreaPixels {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 const PostPage = () => {
-  const [postImage, setPostImage] = useState("");
+  const [postImage, setPostImage] = useState<File |null>(null);
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [caption, setcaption] = useState("");
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaPixels|null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
+  const handleClick = (e:any) => {
     const file = e.target.files[0];
     setPostImage(file);
     setImageSrc(URL.createObjectURL(file));
   };
 
-  const onComplete = (croppedArea: any, croppedAreaPixels: any) => {
+  const onComplete = ( croppedAreaPixels:CroppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
@@ -64,10 +71,10 @@ const PostPage = () => {
       if (!croppedImageBlob) return;
 
       const formData = new FormData();
-      formData.append("images", croppedImageBlob, "cropped-image.jpg");
+      formData.append("image", croppedImageBlob, "cropped-image.jpg");
       formData.append("content", caption);
 
-      dispatch(createPost(formData) as any).then((response: any) => {
+      dispatch(createPost(formData as any) ).then((response: any) => {
         if (response.payload.content) {
           toast.success("Post created successfully");
           navigate("/profile");
