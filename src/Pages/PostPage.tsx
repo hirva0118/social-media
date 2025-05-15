@@ -4,46 +4,39 @@ import { useAppDispatch } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../redux/Post/Slice";
 import { toast } from "react-toastify";
-
-interface CroppedAreaPixels {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
+ 
 const PostPage = () => {
-  const [postImage, setPostImage] = useState<File |null>(null);
+  const [postImage, setPostImage] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [caption, setcaption] = useState("");
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaPixels|null>(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const handleClick = (e:any) => {
+ 
+  const handleClick = (e) => {
     const file = e.target.files[0];
     setPostImage(file);
     setImageSrc(URL.createObjectURL(file));
   };
-
-  const onComplete = ( croppedAreaPixels:CroppedAreaPixels) => {
+ 
+  const onComplete = (croppedArea: any, croppedAreaPixels: any) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
-
+ 
   const getCroppedImg = async (): Promise<Blob | null> => {
     if (!postImage || !croppedAreaPixels) return null;
     const image = await createImageBitmap(postImage);
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
-
+ 
     if (!ctx) return null;
-
+ 
     canvas.width = croppedAreaPixels.width;
     canvas.height = croppedAreaPixels.height;
-
+ 
     ctx.drawImage(
       image,
       croppedAreaPixels.x,
@@ -55,26 +48,26 @@ const PostPage = () => {
       croppedAreaPixels.width,
       croppedAreaPixels.height
     );
-
+ 
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
         resolve(blob);
       }, "image/jpeg");
     });
   };
-
+ 
   const handlesave = async () => {
     if (!postImage || !croppedAreaPixels) return;
     try {
       setIsLoading(true);
       const croppedImageBlob = await getCroppedImg();
       if (!croppedImageBlob) return;
-
+ 
       const formData = new FormData();
-      formData.append("image", croppedImageBlob, "cropped-image.jpg");
+      formData.append("images", croppedImageBlob, "cropped-image.jpg");
       formData.append("content", caption);
-
-      dispatch(createPost(formData as any) ).then((response: any) => {
+ 
+      dispatch(createPost(formData) as any).then((response: any) => {
         if (response.payload.content) {
           toast.success("Post created successfully");
           navigate("/profile");
@@ -86,12 +79,11 @@ const PostPage = () => {
           console.error("Upload failed:", response.payload.error);
           toast.error("File size too large");
         }
+        setIsLoading(false)
       });
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
   const handleCancel = () => {
     setPostImage(null);
@@ -148,11 +140,11 @@ const PostPage = () => {
                   onClick={handlesave}
                 >
                   {isLoading ? (
-                    <div className="absolute left-10 top-3/4 transform -translate-y-1/2 w-full">
+                    <div className="absolute left-12 top-3/4 transform -translate-y-1/2 w-full">
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                     </div>
                   ):("Save and upload")}
-                  {/* Save and Upload */}
+                  
                 </button>
                 <button
                   className="p-2 z-50 border rounded-lg border-gray-200 text-sm"

@@ -333,7 +333,7 @@ const Profile = () => {
               return (
                 <div key={post._id}>
                   <img
-                    className="w-full h-full cursor-pointer"
+                    className="w-full h-20 cursor-pointer"
                     alt="image"
                     src={post.images[0]?.url ?? ""}
                     onClick={() => handleOpenPost(post._id)}

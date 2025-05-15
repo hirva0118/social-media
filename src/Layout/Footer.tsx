@@ -22,7 +22,7 @@ const Footer = () => {
   }
 
   return (
-    <div className="sticky bottom-0 mx-auto flex items-center justify-center bg-gray-100">
+    <div className="sticky bottom-0 mx-auto flex items-center justify-center bg-gray-200">
       <div className="max-w-sm w-full bg-white">
         <div className="w-full grid grid-cols-4  items-center">
           <div className="flex justify-center">

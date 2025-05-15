@@ -25,10 +25,10 @@ const Bookmark = () => {
   return (
     <div className="contain">
       <div className="container">
-        <h1 className="text-lg text-center pb-3">Bookmarked Post</h1>
+        <h1 className="text-lg text-center">Bookmarked Post</h1>
         <div className="grid grid-cols-2 gap-2 pt-5">
         {book?.bookmarkedPosts.map((b) => (
-          <div className="w-32 h-32 ">
+          <div >
             <img alt="image" src={b.images[0].url ?? ""} onClick={()=>handleNavigate(b._id)} />
           </div>
         ))}

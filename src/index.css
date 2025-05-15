@@ -4,9 +4,9 @@
 
 @layer utilities{
     .container {
-        @apply h-[80vh] overflow-y-auto overflow-x-auto break-words max-w-sm py-4 px-5 bg-white
+        @apply min-h-[80vh] overflow-y-auto overflow-x-auto break-words max-w-sm py-4 px-5 bg-white
     }
     .contain{
-        @apply flex items-center justify-center bg-gray-100
+        @apply flex items-center justify-center bg-gray-200
     }
 }

@@ -45,7 +45,7 @@ const Header = () => {
   ];
 
   return (
-    <div className="sticky top-0 mx-auto flex justify-center bg-gray-100 z-10">
+    <div className="sticky top-0 mx-auto flex justify-center bg-gray-200 z-10">
       <div className="max-w-sm w-full bg-white flex flex-row items-center px-4 py-2 relative">
         {/* Left empty div for balance */}
         <div className="w-5"></div>
